@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 export class OmdbApiService {
 
   private _siteURL = 'http://www.omdbapi.com/?t=';
-  private _key = '&apikey=73eacc6f';
+  private _key = 'add your own OMBD API key here';
 
   constructor(private _http: HttpClient) { }
 
@@ -16,8 +16,8 @@ export class OmdbApiService {
     return this._http.get<IOMDBResponse>(this._siteURL+movieName+this._key)
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
-
   }
+
   private handleError(err: HttpErrorResponse) {
     console.log('OmdbApiService: ' + err.message);
     return Observable.throw(err.message);
