@@ -4,23 +4,24 @@ import { OmdbApiService } from './services/omdb-api.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [OmdbApiService],
+
 })
 export class AppComponent {
-  movieData:IOMDBResponse;
+  movieData: IOMDBResponse;
   errorMessage: string;
+  imageHeight = 300;
 
-  constructor(private _omdbService:OmdbApiService){
-    
+  constructor(private _omdbService: OmdbApiService) {
   }
 
-  ngOnInit() {
-    this._omdbService.getMovieData().subscribe(movieData => {
+  getMovieDetails(movieName: string): boolean {
+    this._omdbService.getMovieData(movieName).subscribe(movieData => {
       this.movieData = movieData;
-      console.log('AP: '+ this.movieData);
-
+      console.log('getMovieDetails: ' + this.movieData);
     },
       error => this.errorMessage = <any>error);
-
+    return false;
   }
 }

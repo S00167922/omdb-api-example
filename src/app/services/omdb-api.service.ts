@@ -7,19 +7,19 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class OmdbApiService {
 
-  private _siteURL =
-    'http://www.omdbapi.com/?t=Star+Wars&apikey=73eacc6f'
+  private _siteURL = 'http://www.omdbapi.com/?t=';
+  private _key = '&apikey=73eacc6f';
 
   constructor(private _http: HttpClient) { }
 
-  getMovieData(): Observable<IOMDBResponse> {
-    return this._http.get<IOMDBResponse>(this._siteURL)
+  getMovieData(movieName): Observable<IOMDBResponse> {
+    return this._http.get<IOMDBResponse>(this._siteURL+movieName+this._key)
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
 
   }
   private handleError(err: HttpErrorResponse) {
-    console.log('SearchEngineService: ' + err.message);
+    console.log('OmdbApiService: ' + err.message);
     return Observable.throw(err.message);
   }
 }

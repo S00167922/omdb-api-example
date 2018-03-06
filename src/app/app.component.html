@@ -1,2 +1,16 @@
-Title: {{movieData.Title}}
-
+<h2 class="ui grey header">
+        <img class="ui image" src="./assets/images/Movie.jpg">
+        <div class="content">
+                Do you know your movies?
+        </div>
+      </h2>
+      <form class="ui form">
+    <div class="field">
+        <input type="text" name="movie-name" placeholder="Enter Movie Name" #movieName>
+    </div>
+    <button class="ui button primary" (click)="getMovieDetails(movieName.value)" type="submit">Get the movie details!</button>
+</form>
+<div *ngIf="movieData" class="ui raised segment">
+    <h3 *ngIf="movieData">Movie: {{movieData.Title}}</h3>
+    <img *ngIf="movieData" src= {{movieData.Poster}} [style.height.px]='imageHeight'>
+</div>
